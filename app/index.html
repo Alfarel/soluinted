@@ -1,7 +1,7 @@
-<html lang="en" ng-app="app">
+<html lang="en" >
 <head>
 	<title>Soluinted</title>
-	meta charset="utf-8">
+	<meta charset="utf-8">
     <!--<base href="/test"-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/angular-bootstrap-lightbox.css">
     <!--Angular?-->
     <script type="text/javascript" src="js/angular.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="controllers/app.js"></script>
     <script type="text/javascript" src="js/angular-route.js"></script>
     <script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.0.js"></script>
     
@@ -29,9 +29,83 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script>
 </head>
 
-<body>
-	<footer>
-	</footer>
+<body ng-app="app">
+    <div class="container header">
+        <nav class="navbar navbar-default" role="navigation">
+          
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">              
+              <a class="navbar-brand" ng-href="#/home">
+                <img src="images/logo.png">
+              </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="nav navbar-collapse colorheader" >
+              <ul class="nav navbar-nav">           
+                <li><a ng-href="#/home">Inicio</a></li>
+                <li id="bordeado"><a ng-href="#/quienesomos">¿ Quiénes Somos ?</a></li>
+                <li><a ng-href="#/contactenos">Contáctenos</a></li>
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                
+                <div class="infoheader">
+                  <div class="telefono">
+                    <img src="images/phoneheader.png" >                
+                    <span>313 347 2165</span>
+                  </div>
+                  <div id="email">                                
+                    <span>ventas@soluinted.com</span>
+                  </div>
+                </div>             
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          <!-- /.container-fluid -->
+        </nav>
+        <!--
+        <div class="navbar-header">          
+          <a class="navbar-brand" href="#/home">
+            <img src="images/logo.png">
+          </a>
+        </div>
+        <div class="nav navbar-nav colorheader">
+          <ul class="nav navbar-nav">                     
+            <li><a ng-href="#/home">Inicio</a></li>
+            <li><a ng-href="#/quienesomos">¿ Quiénes Somos ?</a></li>
+            <li><a ng-href="#/contactenos">Contáctenos</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">            
+            <div class="infoheader">
+              <div class="telefono">
+                <img src="images/phoneheader.png" >                
+                <span>313 347 2165</span>
+              </div>
+              <div id="email">                              
+                <span>ventas@soluinted.com</span>
+              </div>
+            </div>             
+          </ul>
+        </div>-->
+
+    </div>
+    <div class="container" id="temporal">
+        Espacio para el slider
+    </div>
+    <div class="container">
+        <div class="catalogo">
+            <span >Catálogo de Productos</span>
+            <img src="images/glyphicon-download.png">
+        </div>
+    </div>
+    <div class="product-section">
+        <div class="container categoria">
+            <span>Categoría 1</span>
+        </div>
+        <div ng-view="">      
+        </div>
+    </div>
+       
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
