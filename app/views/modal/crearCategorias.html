@@ -1,0 +1,25 @@
+<div>
+	<div class="modal-header">
+        <h3 class="modal-title">Categorías</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+        	<div class="form-group">
+	            <label>Nombre de la categoría</label>
+	            <input class="form-control" ng-model="datos.nombre" />
+	            <!--<p class="help-block">Nombre</p>-->
+	        </div>
+	        <div class="form-group">
+	            <label>Descripción</label>
+	            <textarea class="form-control" ng-model="datos.descripcion"></textarea>
+	            <!--<p class="help-block">Nombre</p>-->
+	        </div>
+        </form>
+
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="Ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</div>
