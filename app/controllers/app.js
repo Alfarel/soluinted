@@ -27,7 +27,11 @@ app.config(function($routeProvider,$locationProvider) {
         .when('/productos/:productName', {
             templateUrl : 'views/detalle.html',
             controller  : 'detailController'
-        })        
+        })  
+        .when('/admin', {
+            templateUrl : 'views/admin/index.html',
+            controller  : 'detailController'
+        })     
         .otherwise({
             redirectTo: '/'
         });
