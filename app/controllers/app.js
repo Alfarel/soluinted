@@ -2,7 +2,7 @@
 // Creación del módulo
 var app = angular.module('app', ['ngRoute','ui.bootstrap','google-maps','bootstrapLightbox']);
 
-var admin = angular.module('administracion',['ui.bootstrap', 'ngRoute']);
+var admin = angular.module('administracion',['ui.bootstrap', 'ngRoute', 'angularFileUpload']);
 
 // Configuración de las rutas
 app.config(function($routeProvider,$locationProvider) {

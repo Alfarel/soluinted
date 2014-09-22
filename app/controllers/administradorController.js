@@ -45,13 +45,13 @@ admin.controller("administradorController",['$scope','$http','$modal' , function
 	}
 
 
-	$scope.click = function(tipo){
+	/*$scope.click = function(tipo){
 
 		$http.post("../../php/categorias.php",{data: "spawn", data2: "adfasfasf", data3: "qwerty"})
 		.success(function(data){
 			
 		});	
-	}
+	}*/
 
 	$scope.guardarCategoria = function(data){
 		$http.post("../../php/categorias.php",data)
