@@ -24,10 +24,14 @@ app.config(function($routeProvider,$locationProvider) {
             templateUrl : 'views/contactenos.html',
             controller  : 'contactenosController'
         })
-        .when('/productos/:productName', {
+        // .when('/productos/:productName', {
+        //     templateUrl : 'views/detalle.html',
+        //     controller  : 'detailController'
+        // })
+        when('/detalle', {
             templateUrl : 'views/detalle.html',
             controller  : 'detailController'
-        })  
+        })   
         .when('/admin', {
             templateUrl : 'views/admin/index.html',
             controller  : 'detailController'
@@ -37,4 +41,30 @@ app.config(function($routeProvider,$locationProvider) {
         });
         //locationProvider.html5Mode(true);
 });
+
+app.controller('detailController',function($scope) {
+    // body...
+    $scope.message = 'This is the detail controller';    
+});
+
+
+function CarouselDetail($scope){
+  $scope.myInterval = 3000;
+  $scope.slides = [
+    {
+      image: 'images/Silla1.png'
+    },
+    {
+      image: 'images/Silla2.png'
+    },
+    {
+      image: 'images/Silla3.png'
+    },
+    {
+      image: 'images/Silla4.png'
+    }
+  ];
+}
+
+
 

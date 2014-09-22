@@ -1,3 +1,60 @@
-<div>
-    <h2>This is the detalle view</h2>
+<div class="container">
+	<div class="row">
+		<div class="no-block col-md-6">
+			<div class="productName">
+				<h2>Nombre</h2>
+			</div>
+			<div class="productDesc">
+				Características
+				<ul class="featuresList" type="disk">
+					<li>Descripción lorem ipsum
+					</li>
+					<li>Descripción lorem ipsum
+					</li>
+					<li>Descripción lorem ipsum
+					</li>
+					<li>Descripción lorem ipsum
+					</li>
+					<li>Descripción lorem ipsum
+					</li>
+				</ul>
+				
+			</div>	
+
+		</div>		
+		<div class="col-md-6">
+			<div class="no-controls" ng-controller="CarouselDetail">        
+	          <carousel interval="myInterval">
+	            <slide ng-repeat="slide in slides" active="slide.active">
+	              <img ng-src="{{slide.image}}" style="margin:auto;">
+	              <!--<div class="carousel-caption">
+	                <h4>Slide {{$index}}</h4>
+	                <p>{{slide.text}}</p>
+	              </div>-->
+	            </slide>
+	          </carousel>
+	        </div>
+		</div>
+
+		
+	</div>
+<!-- 	<div class="row">
+		<div class="no-block col-md-6">
+		    <!-- slider container -->
+		    <div class="container slider" ng-controller="MainCtrl">
+		        <!-- enumerate all photos -->
+		        <img ng-repeat="photo in photos" class="slide" ng-swipe-right="showPrev()" ng-swipe-left="showNext()" ng-show="isActive($index)" ng-src="{{photo.src}}" />
+		        <!-- prev / next controls -->
+		        <a class="arrow prev" href="#" ng-click="showPrev()"></a>
+		        <a class="arrow next" href="#" ng-click="showNext()"></a>
+		        <!-- extra navigation controls -->
+		        <ul class="nav">
+		            <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
+		                <img src="{{photo.src}}" alt="{{photo.desc}}" title="{{photo.desc}}" ng-click="showPhoto($index);" />
+		            </li>
+		        </ul>
+		    </div>
+		</div>
+	</div> -->
+
 </div>

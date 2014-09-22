@@ -1,4 +1,4 @@
-<html lang="en" >
+<html lang="en"  >
 <head>
 	<title>Soluinted</title>
 	<meta charset="utf-8">
@@ -9,12 +9,15 @@
     
     <!--Estilos+*-Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/estilos.css" rel="stylesheet">    
+    <link href="css/estilos.css" rel="stylesheet">  
+    <!-- <link href="css/style.css" rel="stylesheet"> -->  
     <link rel="stylesheet" href="css/loading-bar.css">
     <link rel="stylesheet" href="css/angular-bootstrap-lightbox.css">
     <!--Angular?-->
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="controllers/app.js"></script>
+    <script type="text/javascript" src="controllers/homeController.js"  ></script>
+    <script type="text/javascript" src="controllers/app2.js"></script>
     <script type="text/javascript" src="js/angular-route.js"></script>
     <script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.0.js"></script>
     
@@ -88,22 +91,9 @@
         </div>-->
 
     </div>
-    <div class="container" id="temporal">
-        Espacio para el slider
+    <div ng-view="">      
     </div>
-    <div class="container">
-        <div class="catalogo">
-            <span >Catálogo de Productos</span>
-            <img src="images/glyphicon-download.png">
-        </div>
-    </div>
-    <div class="product-section">
-        <div class="container categoria">
-            <span>Categoría 1</span>
-        </div>
-        <div ng-view="">      
-        </div>
-    </div>
+    
        
 
 
