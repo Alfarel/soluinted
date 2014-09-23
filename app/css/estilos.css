@@ -69,16 +69,37 @@ form.form-contacto div.form-group textarea{
 	width: 180px;
 	height: 276px;
 }
+/*a.thumbnail:hover	{
+	background-color: #990000;
+}*/
+
 .product div{
 	background-color:white;
 	/*padding: 10px;*/
 	margin:  10px 0 10px 0 ;
 	padding: 0;	
 }
+
+.product a:hover{
+	background-color: #990000;
+	color: white;
+}
+.product a:hover .divider-red{
+	border-top: 1px solid #990000;
+}
+.divider-red{
+	border-top: 1px solid #CC0000; 
+}
+.divider-red:hover{
+	border-top: none; 
+}
+/*div.productName:hover{
+	background-color: #990000;
+}*/
 .productName{
 	font-size: 16px;
 	border-top: 1px solid #CC0000;
-
+	
 }
 div.productName{
 	padding-top: 10px;
@@ -92,6 +113,9 @@ a.thumbnail {
 	height: 266px;
 	text-decoration: none;
 	color: #333333;
+	padding: 0;
+	font-size: 16px;
+	text-align: center;
 }
 .telefono span{
 	font-size: 24px;

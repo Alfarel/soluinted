@@ -1,4 +1,4 @@
 app.controller('quienesomosController',function($scope) {
 	// body...
-	$scoper.message = 'This is the quienesomos controller';
+	$scope.message = 'This is the quienesomos controller';
 });
