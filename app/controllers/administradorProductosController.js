@@ -10,6 +10,41 @@ admin.controller("administradorProductosController",['$scope','$http', '$upload'
 		$scope.categorias = data;
 	});
 
+	$scope.cargaInicial = function(){
+		$scope.datosTabla = [];
+		$http.get("../../json/productos.json")
+		.success(function(data){
+			if(data!=null){
+				console.log(data);				
+				$scope.todasCategorias = data;
+				$scope.pageChanged();
+			}				
+		});
+	}
+
+	$scope.modificar = function($index){
+		var modalInstance = $modal.open({
+	      templateUrl: '../../views/modal/crearProductos.html',
+	      controller: insercionProductosCtrl,	 
+	      resolve:{
+	    		categoria : function(){
+    				return $scope.categorias;
+	    		},
+
+	    		producto: function(){
+	    			return $scope.datosTabla[$index];
+	    		}   	
+	    	}
+	    		     
+	    });
+
+	    modalInstance.result.then(function (selectedItem) {
+	    	$scope.guardarProducto(selectedItem)	    	
+	    	 	
+	    }, function () {
+	    });
+	}
+
 	$scope.anadir = function(){
 		var modalInstance = $modal.open({
 	      templateUrl: '../../views/modal/crearProductos.html',
@@ -17,6 +52,9 @@ admin.controller("administradorProductosController",['$scope','$http', '$upload'
 	      resolve:{
 	    		categoria : function(){
     				return $scope.categorias;
+	    		},
+	    		producto: function(){
+	    			return "";
 	    		}   	
 	    	}	     
 	    });
@@ -25,16 +63,15 @@ admin.controller("administradorProductosController",['$scope','$http', '$upload'
 	    	$scope.guardarProducto(selectedItem)	    	
 	    	 	
 	    }, function () {
-	    	alert("Ocurrio un error, vuelva a intentarlo");
 	    });
 	}
 
 	$scope.guardarProducto = function(producto){
-		console.log(producto.imagenes);
+		
 
 		for(var i =0 ; i< producto.imagenes.length; i++){
 			$scope.upload = $upload.upload({
-			url: "../../php/productos.php",
+			url: "../../productos.php",
 			data : {
 				nombre: producto.nombre,
 				categoria: producto.Categoria,
@@ -42,16 +79,29 @@ admin.controller("administradorProductosController",['$scope','$http', '$upload'
 			},
 			file: producto.imagenes[i]
 			}).success(function(data){
-				alert(data);
+				console.log(data);
+				$scope.cargaInicial();
 			}).error(function(){alert("se daño esto");});	
-		}
-		
 
+		}
+	}
+
+	$scope.pageChanged = function(){
+		$scope.mostrarPaginados($scope.todasCategorias);
+	}
+
+	$scope.mostrarPaginados = function(arreglo){
+
+		$scope.totalItems = arreglo.length;
+		$scope.datosTabla = [];
+		for (var i = 8 * ($scope.paginaActual - 1) ; i < 8 * $scope.paginaActual && i < arreglo.length; i++){
+			$scope.datosTabla.push(arreglo[i]);
+		}
 	}
 
 }]);
 
-var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria){
+var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, producto){
 
 	$scope.seleccion={
 		categoria: ""
@@ -66,6 +116,19 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria){
 
 	$http.get("../../json/categorias.json").success(function(data){
 		$scope.categoria.categorias = data;
+
+		if(producto != ""){
+			console.log(producto);
+			$scope.datos.nombre = producto.nombre_producto;
+			$scope.datos.Categoria = producto.Categorias;
+			$scope.datos.Caracteristicas = producto.Caracteristicas;
+
+			console.log(producto.Caracteristicas);
+
+			var x = recuperaCategoria(producto.Categorias);
+			if(x!= null)
+				$scope.seleccion.categoria = x;
+		}
 	});
 
 
@@ -75,6 +138,8 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria){
 		caracteristicas: [],
 		imagenes : []
 	};
+
+	
 
 	$scope.producto = { descripcion : ""};
 
@@ -106,5 +171,17 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria){
 				return false;
 		}
 		return true;
+	}
+
+	function recuperaCategoria(dato){
+		console.log($scope.categoria.categorias);
+		for(var i=0; i< $scope.categoria.categorias.length; i++){
+			console.log($scope.categoria.categorias[i].NombreCategoria);
+			if($scope.categoria.categorias[i].NombreCategoria == dato){
+				alert("aqui");
+				return $scope.categoria.categorias[i];
+			}
+		}
+		return null;
 	}
 }
