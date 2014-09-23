@@ -65,6 +65,34 @@ form.form-contacto div.form-group textarea{
 	background-color: #333333;
 	height: 104px;
 }
+.product{
+	width: 180px;
+	height: 276px;
+}
+.product div{
+	background-color:white;
+	/*padding: 10px;*/
+	margin:  10px 0 10px 0 ;
+	padding: 0;	
+}
+.productName{
+	font-size: 16px;
+	border-top: 1px solid #CC0000;
+
+}
+div.productName{
+	padding-top: 10px;
+}
+.categoria{
+	margin-top: 10px;
+	padding: 10px;
+}
+a.thumbnail {
+	margin: 0;
+	height: 266px;
+	text-decoration: none;
+	color: #333333;
+}
 .telefono span{
 	font-size: 24px;
 	color: #FFFF00;
