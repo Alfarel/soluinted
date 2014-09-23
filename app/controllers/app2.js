@@ -1,6 +1,5 @@
 
-angular.module('galleryApp',[]).
-app.factory('DataSource', ['$http',
+angular.module('galleryApp',[]).factory('DataSource', ['$http',
     function($http){
        return {
            get: function(fileName,callback){

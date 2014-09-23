@@ -1,3 +1,110 @@
-<div>
-    <h2>This is the quienesomos view</h2>
+<div class="container padding lineagris">
+	<div class="row">
+		<div class="no-block col-md-6 ">
+			<h2>¿Quienes Somos?</h2>
+			<br>
+			<p>
+				Somos una empresa especializada en la fabricación,
+				distribución y comercialización de productos como
+				mobiliario, dotaciones escolares, elementos de
+				laboratorios, elementos deportivos, diseños de
+				ambientes para aprovechamiento de espacio entre
+				otros; Productos de la mejor calidad y que esperamos se
+				conviertan de mayor preferencia   en el sector industrial
+				y comercial de nuestra  región.
+				</p><p>
+				Es una empresa abierta a la innovación, por lo que
+				siempre estamos capacitándonos y modernizándonos,
+				es principalmente por esta razón, por la cual hoy
+				estamos en capacidad  de ofrecer una excelente
+				presentación de nuestra línea de productos, que
+				estaríamos complacidos en darles a conocer.
+				</p><p>
+				En caso de que este interesado en nuestros productos no
+				dude en ponerse en contacto y conocer personalmente
+				nuestras instalaciones.
+			</p>
+			<br>
+			<h3>Nuestra Misión</h3>
+			<p>
+				Fabricamos productos mobiliarios con líneas de diseño
+				novedosas y funcionales, que permitan el confort y
+				bienestar de nuestros clientes.
+			</p>
+			<br>	
+			<h3>Nuestra Visión</h3>
+			<p>
+				Soluinted será en el 2020 una empresa con
+				reconocimiento local y nacional, destacandose por la
+				fabricación de productos funcionales y la atención
+				integral de nuestros clientes.
+			</p>
+		</div>
+<!-- 		<div class="col-lg-6 col-md-6 col-sm-6 ">
+            <form class="form-contacto" role="form">
+                <div class="form-group">                      
+                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre">
+                </div>
+                <div class="form-group">                      
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="E-mail">
+                </div>
+                <div class="form-group">                      
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Celular">
+                </div>
+                  <textarea class="form-control" placeholder="Mensaje..." rows="4">
+
+                  </textarea>
+                <div class="form-group" style="padding-top: 15px">                              
+                  <button type="submit" class="btn btn-success">Solicitar reserva</button>
+                </div>
+            </form>
+        </div> -->
+        <div class="col-md-6 padding">
+        	<img src="images/imgempresa.png">
+        </div>
+
+        <div class="col-md-6 lineamarilla" ng-controller="FormController">
+        	<p>Tiene alguna inquietud, escríbanos en el siguiente formulario de contacto.</p>
+			<form ng-submit="submit(contactform)" class="form-contacto" name="contactform" role="form" method="post" action="">
+          
+          <!--<div class="form-group" ng-class="{ 'has-error': contactform.asunto.$invalid && submitted }">
+            <input ng-model="formData.asunto" type="hidden" class="form-control" name="asunto" id="asunto" value="Cabaña 1" style="display:none;">            
+          </div>-->
+          		<div class="form-group" ng-class="{ 'has-error': contactform.asunto.$invalid && submitted }">				    
+			    <input ng-model="formData.asunto" type="text" class="form-control" name="asunto" id="asunto" placeholder="Asunto" required>
+			  	</div>
+		  		<div class="form-group" ng-class="{ 'has-error': contactform.nombre.$invalid && submitted }">				    
+			    <input ng-model="formData.nombre" type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
+			  	</div>
+
+			  	<div class="form-group" ng-class="{ 'has-error': contactform.email.$invalid && submitted }">				    
+			    <input ng-model="formData.email" type="email" class="form-control" name="email" id="email" placeholder="E-mail" required>
+			  	</div>
+
+			  	<div class="form-group" ng-class="{ 'has-error': contactform.celular.$invalid && submitted }">				    
+			    <input ng-model="formData.celular"type="text" class="form-control" name="celular" id="celular" placeholder="Celular" required>
+			  	</div>
+			  	<div class="form-group" ng-class="{ 'has-error': contactform.mensaje.$invalid && submitted }">
+			  	<textarea ng-model="formData.mensaje" type="text" class="form-control" name="mensaje" id="mensaje" placeholder="Mensaje" required rows="4"></textarea>
+			  	</div>        
+
+				
+	            <div class="form-group">                     
+				    <button type="submit" value="Submit" class="btn btn-success" ng-disabled="submitButtonDisabled">Enviar Mensaje</button>
+	            </div>
+			</form>
+        <!--<p ng-class="result" style="padding: 15px; margin: 0;">{{ resultMessage }}</p>-->
+		</div>
+	</div>
+	<div class="footer">
+		<div class="mapasitio">
+			<a href="#/mapasitio">Mapa del sitio</a>
+		</div>
+		<div class="terminos">
+			<a href="#/terminos">Términos y políticas de uso</a>
+		</div>
+		
+	</div>	
+
+
 </div>

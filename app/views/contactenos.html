@@ -1,3 +1,80 @@
-<div>
-    <h2>This is the contactenos view</h2>
+<div class="container padding lineagris">
+	<div class="row">
+		<div class="no-block col-md-6 ">
+			<h2>Contáctenos</h2>
+			<br>
+			<p>
+				Si desea comunicarse con nosotros, para realizar una inquietud o cotización, no dude en hacerlo a través de nuestro celular
+				</p><p>
+					<h2 class="h2-color">313 347 2165</h2>
+				</p><br><p>
+				Estamos ubicados en la ciudad de Villavicencio, en la zona industrial de la ciudad y contamos con la capacidad de suministrar nuestros productos a cualquier parte de Colombia.
+			</p>
+			
+		</div>
+<!-- 		<div class="col-lg-6 col-md-6 col-sm-6 ">
+            <form class="form-contacto" role="form">
+                <div class="form-group">                      
+                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre">
+                </div>
+                <div class="form-group">                      
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="E-mail">
+                </div>
+                <div class="form-group">                      
+                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Celular">
+                </div>
+                  <textarea class="form-control" placeholder="Mensaje..." rows="4">
+
+                  </textarea>
+                <div class="form-group" style="padding-top: 15px">                              
+                  <button type="submit" class="btn btn-success">Solicitar reserva</button>
+                </div>
+            </form>
+        </div> -->
+
+        <div class="col-md-6 " ng-controller="FormController">
+        	<br><br><br>
+        	<p>Si desea comunicación escrita hagalo a través del siguiente formulario de contacto dispuesto para ello.</p>
+			<form ng-submit="submit(contactform)" class="form-contacto" name="contactform" role="form" method="post" action="">
+          
+          <!--<div class="form-group" ng-class="{ 'has-error': contactform.asunto.$invalid && submitted }">
+            <input ng-model="formData.asunto" type="hidden" class="form-control" name="asunto" id="asunto" value="Cabaña 1" style="display:none;">            
+          </div>-->
+          		<div class="form-group" ng-class="{ 'has-error': contactform.asunto.$invalid && submitted }">				    
+			    <input ng-model="formData.asunto" type="text" class="form-control" name="asunto" id="asunto" placeholder="Asunto" required>
+			  	</div>
+		  		<div class="form-group" ng-class="{ 'has-error': contactform.nombre.$invalid && submitted }">				    
+			    <input ng-model="formData.nombre" type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
+			  	</div>
+
+			  	<div class="form-group" ng-class="{ 'has-error': contactform.email.$invalid && submitted }">				    
+			    <input ng-model="formData.email" type="email" class="form-control" name="email" id="email" placeholder="E-mail" required>
+			  	</div>
+
+			  	<div class="form-group" ng-class="{ 'has-error': contactform.celular.$invalid && submitted }">				    
+			    <input ng-model="formData.celular"type="text" class="form-control" name="celular" id="celular" placeholder="Celular" required>
+			  	</div>
+			  	<div class="form-group" ng-class="{ 'has-error': contactform.mensaje.$invalid && submitted }">
+			  	<textarea ng-model="formData.mensaje" type="text" class="form-control" name="mensaje" id="mensaje" placeholder="Mensaje" required rows="4"></textarea>
+			  	</div>        
+
+				
+	            <div class="form-group">                     
+				    <button type="submit" value="Submit" class="btn btn-success" ng-disabled="submitButtonDisabled">Enviar Mensaje</button>
+	            </div>
+			</form>
+        <!--<p ng-class="result" style="padding: 15px; margin: 0;">{{ resultMessage }}</p>-->
+		</div>
+	</div>
+	<div class="footer">
+		<div class="mapasitio">
+			<a href="#/mapasitio">Mapa del sitio</a>
+		</div>
+		<div class="terminos">
+			<a href="#/terminos">Términos y políticas de uso</a>
+		</div>
+		
+	</div>	
+
+
 </div>

@@ -28,7 +28,7 @@ app.config(function($routeProvider,$locationProvider) {
         //     templateUrl : 'views/detalle.html',
         //     controller  : 'detailController'
         // })
-        when('/detalle', {
+        .when('/detalle', {
             templateUrl : 'views/detalle.html',
             controller  : 'detailController'
         })   
