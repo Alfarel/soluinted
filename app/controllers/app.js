@@ -1,6 +1,6 @@
 
 // Creación del módulo
-var app = angular.module('app', ['ngRoute','ui.bootstrap','google-maps','bootstrapLightbox']);
+var app = angular.module('app', ['ngRoute','ui.bootstrap','google-maps','angular-carousel','bootstrapLightbox']);
 
 var admin = angular.module('administracion',['ui.bootstrap', 'ngRoute', 'angularFileUpload']);
     

@@ -10,6 +10,7 @@
     <!--Estilos+*-Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/estilos.css" rel="stylesheet">  
+    <!-- <link href="css/demo.css" rel="stylesheet">  -->
     <!-- <link href="css/style.css" rel="stylesheet"> -->  
     <link rel="stylesheet" href="css/loading-bar.css">
     <link rel="stylesheet" href="css/angular-bootstrap-lightbox.css">
@@ -39,6 +40,8 @@
     <script src='js/lodash.underscore.js'></script>
     <script src='js/angular-google-maps.js'></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js"></script>
+    <script type="text/javascript" src="js/angular-carousel.js"></script>
+    <link rel="stylesheet" href="css/angular-carousel.css">
 </head>
 
 <body ng-app="app">
@@ -101,6 +104,9 @@
 
     </div>
     <div ng-view="">      
+    </div>
+    <div ng-include
+    src="views/admin/index.html">
     </div>
     
        

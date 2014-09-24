@@ -1,33 +1,50 @@
-<div class="container">
+<div class="container padding lineagris">
 	<div class="row">
 		<div class="no-block col-md-6">
-			<div class="productName">
-				<h2>{{producto.nombre_producto}}</h2>
+			<div class="detailName">
+				<h2>{{productos.nombre_producto}}</h2>
 			</div>
 			<div class="productDesc">
-				Características
+				<br><br><br>
+				<h3>Características</h3>
+				<br>
 				<ul class="featuresList" type="disk">
-					<li ng-repeat="caracteristica in producto.Caracteristicas">{{caracteristica}}
+					<li ng-repeat="caracteristica in productos.Caracteristicas">{{caracteristica}}
 					</li>					
 				</ul>
 				
 			</div>	
 
 		</div>		
-		<div class="col-md-6">
+		<!--  <div class="col-md-6">
 			<div class="no-controls" ng-controller="CarouselDetail">        
 	          <carousel interval="myInterval">
 	            <slide ng-repeat="slide in slides" active="slide.active">
 	              <img ng-src="{{slide.image}}" style="margin:auto;">
-	              <!--<div class="carousel-caption">
+	              <div class="carousel-caption">
 	                <h4>Slide {{$index}}</h4>
 	                <p>{{slide.text}}</p>
-	              </div>-->
+	              </div>
 	            </slide>
 	          </carousel>
 	        </div>
-		</div>
+		</div>  -->
 
+
+	<div class="col-md-6 slider" ng-controller="DemoCtrl">
+		<div class="slider-img">
+			<ul rn-carousel rn-carousel-index="slideIndex2" class="my-slider ng-cloak">
+            <li ng-repeat="slide in slides2" ng-style="{'background-image': 'url(' + slide.image + ')'}"></li>
+        </ul>
+		</div>
+		<div class="slider-thumbnail">
+			<div class="ng-cloak thumbs">
+            	<div class="thumb2" ng-repeat="slide in slides2" ng-click="$parent.slideIndex2=$index" ng-style="{'background-image': 'url(' + slide.image + ')'}" ng-class="{'is-active': ($parent.slideIndex2==$index)}">
+            	</div>
+        	</div>
+		</div>
+        
+	</div>
 		
 	</div>
 	<!-- <div class="row">
