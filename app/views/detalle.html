@@ -5,14 +5,44 @@
 				<h2>{{productos.nombre_producto}}</h2>
 			</div>
 			<div class="productDesc">
-				<br><br><br>
+				<br>
 				<h3>Características</h3>
 				<br>
 				<ul class="featuresList" type="disk">
 					<li ng-repeat="caracteristica in productos.Caracteristicas">{{caracteristica}}
 					</li>					
 				</ul>
-				
+				<br>
+			<div class="col-md-6 " ng-controller="FormController">      	
+			
+				<form ng-submit="submit(contactform)" class="form-contacto" name="contactform" role="form" method="post" action="">        
+
+	          		<div class="form-group" ng-class="{ 'has-error': contactform.asunto.$invalid && submitted }">				    
+				    <input ng-model="formData.asunto" type="text" class="form-control" name="asunto" id="asunto" placeholder="Asunto" required>
+				  	</div>
+			  		<div class="form-group" ng-class="{ 'has-error': contactform.nombre.$invalid && submitted }">				    
+				    <input ng-model="formData.nombre" type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
+				  	</div>
+
+				  	<div class="form-group" ng-class="{ 'has-error': contactform.email.$invalid && submitted }">				    
+				    <input ng-model="formData.email" type="email" class="form-control" name="email" id="email" placeholder="E-mail" required>
+				  	</div>
+
+				  	<div class="form-group" ng-class="{ 'has-error': contactform.celular.$invalid && submitted }">				    
+				    <input ng-model="formData.celular"type="text" class="form-control" name="celular" id="celular" placeholder="Celular" required>
+				  	</div>
+				  	<div class="form-group" ng-class="{ 'has-error': contactform.mensaje.$invalid && submitted }">
+				  	<textarea ng-model="formData.mensaje" type="text" class="form-control" name="mensaje" id="mensaje" placeholder="Mensaje" required rows="4"></textarea>
+				  	</div>        
+
+					
+		            <div class="form-group">                     
+					    <button type="submit" value="Submit" class="btn btn-success btn-red" ng-disabled="submitButtonDisabled">Solicitar Cotización</button>
+		            </div>
+				</form>       
+			</div>                  
+			    <!-- <button ng-click="submit()" type="submit" value="Submit" class="btn btn-success btn-red" ng-disabled="submitButtonDisabled">Enviar un mensaje para cotización</button> -->
+		           
 			</div>	
 
 		</div>		
@@ -66,4 +96,13 @@
 		</div>
 	</div>  -->
 
+<div class="footer">
+    <div class="mapasitio">
+        <a href="#/mapasitio">Mapa del sitio</a>
+    </div>
+    <div class="terminos">
+        <a href="#/terminos">Términos y políticas de uso</a>
+    </div>
+
+</div>
 </div>

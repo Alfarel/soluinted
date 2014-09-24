@@ -25,7 +25,36 @@ app.controller('detailController',['$scope','$routeParams','$http', '$filter',
 
   		// $scope.name = result.nombre_producto;
   		// console.log(result.nombre_producto);	
+  		$scope.submit = function() {
+	        $scope.submitted = true;
+	        $scope.submitButtonDisabled = true;
+	        //if (contactform.$valid) {
 
+	            $http({
+	                method  : 'POST',
+	                url     : 'email.php',
+	                data    : $.param($scope.productos),  //param method from jQuery
+	                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  //set the headers so angular passing info as form data (not request payload)
+	            }).success(function(data){
+	                console.log(data);
+	                if (data.success) { //success comes from the return json object
+	                    $scope.submitButtonDisabled = true;
+	                    $scope.resultMessage = data.message;
+	                    $window.alert($scope.resultMessage);
+	                    //$scope.result='bg-success';
+	                } else {
+	                    $scope.submitButtonDisabled = false;
+	                    $scope.resultMessage = data.message;
+	                    $window.alert($scope.resultMessage);
+	                    //$scope.result='bg-danger';
+	                }
+	            });
+	        /*} else {
+	            $scope.submitButtonDisabled = false;
+	            $scope.resultMessage = 'Failed :( Please fill out all the fields.';
+	            $scope.result='bg-danger';
+	        }*/
+	    }
 
 }]);
 
