@@ -2,6 +2,7 @@ app.controller('detailController',['$scope','$routeParams','$http', '$filter',
 	function($scope,$routeParams,$http, $filter) {
 		
 		// body...
+		$scope.slides2=[];
 		$scope.categorias = [];
 		$scope.message = 'This is the detail controller';
 		$http.get("../app/json/categorias.json").success(function(data){
@@ -13,10 +14,23 @@ app.controller('detailController',['$scope','$routeParams','$http', '$filter',
 			$scope.productUrl = $routeParams.productUrl;
 			// console.log($scope.productUrl);
 			$scope.productos = data;
-			// console.log($scope.productos);
+			// console.log($scope.productos[0].Imagenes[0]);
 			var result = $filter('filter')($scope.productos, {nombre_producto:$scope.productUrl})[0];
 			$scope.productos=result;
-			// console.log($scope.productos);
+			// console.log(result.Imagenes[0]);
+			// console.log($scope.productos.Imagenes[0]);
+			
+			console.log($scope.productos);
+			for (var i = 0; i < $scope.productos.Imagenes.length; i++){
+				
+				console.log($scope.productos.Imagenes[i]);
+				$scope.slides2.push({image:$scope.productos.Imagenes[i]});
+				console.log($scope.slides2[i].image);
+					
+				
+			}
+			$scope.slideIndex = 0;
+			$scope.slideIndex2 = 2;
 		});	
 		// $scope.productUrl = $routeParams.productUrl;
 		// console.log($scope.productUrl);
@@ -25,36 +39,7 @@ app.controller('detailController',['$scope','$routeParams','$http', '$filter',
 
   		// $scope.name = result.nombre_producto;
   		// console.log(result.nombre_producto);	
-  		$scope.submit = function() {
-	        $scope.submitted = true;
-	        $scope.submitButtonDisabled = true;
-	        //if (contactform.$valid) {
 
-	            $http({
-	                method  : 'POST',
-	                url     : 'email.php',
-	                data    : $.param($scope.productos),  //param method from jQuery
-	                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  //set the headers so angular passing info as form data (not request payload)
-	            }).success(function(data){
-	                console.log(data);
-	                if (data.success) { //success comes from the return json object
-	                    $scope.submitButtonDisabled = true;
-	                    $scope.resultMessage = data.message;
-	                    $window.alert($scope.resultMessage);
-	                    //$scope.result='bg-success';
-	                } else {
-	                    $scope.submitButtonDisabled = false;
-	                    $scope.resultMessage = data.message;
-	                    $window.alert($scope.resultMessage);
-	                    //$scope.result='bg-danger';
-	                }
-	            });
-	        /*} else {
-	            $scope.submitButtonDisabled = false;
-	            $scope.resultMessage = 'Failed :( Please fill out all the fields.';
-	            $scope.result='bg-danger';
-	        }*/
-	    }
 
 }]);
 

@@ -11,9 +11,9 @@
     </div>
 </div>
 <div class="product-section">
-    <div class="container categoria">
-        <span>Categoría X</span>
-        <div class="product" ng-repeat="producto in productos">
+    <div class="container categoria" ng-repeat="categoria in categorias">
+        <span>{{categoria.NombreCategoria}}</span><br>
+        <div class="product col-md-2 col-lg-2" ng-repeat="producto in productos">
             <div class="productImg  thumb">
                 <a class="thumbnail" href="#/productos/{{producto.nombre_producto}}">
                     <img src="{{producto.Imagenes[0]}}">

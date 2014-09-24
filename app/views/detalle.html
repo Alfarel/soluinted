@@ -13,6 +13,10 @@
 					</li>					
 				</ul>
 				<br>
+				<div class="cotizar">¿Desea obtener más información de este producto? Diligencie el siguiente formulario y solicite una cotización.</div>
+				
+				
+				<br>
 			<div class="col-md-6 " ng-controller="FormController">      	
 			
 				<form ng-submit="submit(contactform)" class="form-contacto" name="contactform" role="form" method="post" action="">        
@@ -61,7 +65,7 @@
 		</div>  -->
 
 
-	<div class="col-md-6 slider" ng-controller="DemoCtrl">
+	<div class="col-md-6 slider" ng-controller="detailController">
 		<div class="slider-img">
 			<ul rn-carousel rn-carousel-index="slideIndex2" class="my-slider ng-cloak">
             <li ng-repeat="slide in slides2" ng-style="{'background-image': 'url(' + slide.image + ')'}"></li>
