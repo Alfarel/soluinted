@@ -66,6 +66,27 @@ admin.controller("administradorProductosController",['$scope','$http', '$upload'
 	    });
 	}
 
+	$scope.eliminar = function($index){
+		var modalInstance = $modal.open({
+	      templateUrl: '../../views/modal/notificacionEliminar.html',
+	      controller: verificarBorradoCtrl,
+	      	resolve:{
+      		nombre: function(){
+      			return $scope.datosTabla[$index].nombre_producto;
+      		}	 	
+	      } 	       	   	       
+	    });
+
+	    modalInstance.result.then(function () {
+	    	$http.post("../../php/borrarProductos.php", $scope.datosTabla[$index] )
+	    	.success(function(){
+	    		$scope.cargaInicial();
+	    	});    	
+	    }, function () {   	
+	    	console.log(cancelar);
+	    });
+	}
+
 	$scope.guardarProducto = function(producto){
 		
 
@@ -165,6 +186,10 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 		}
 	}
 
+	$scope.cancel = function(){
+    	$modalInstance.dismiss('cancel');
+	}
+
 	function revisaCoincidencias(nombre){
 		for(var i = 0; i< $scope.datos.imagenes.length; i++){
 			if($scope.datos.imagenes[i].name == nombre)
@@ -184,4 +209,19 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 		}
 		return null;
 	}
+}
+
+var verificarBorradoCtrl = function($scope, $modalInstance, nombre){
+	$scope.elemento ={
+		nombre: nombre
+	}
+
+	$scope.Ok = function(){
+		$modalInstance.close();		
+	}
+
+	$scope.cancel = function(){
+    	$modalInstance.dismiss('cancel');
+	}
+
 }

@@ -280,12 +280,12 @@
 	        <div id="page-wrapper">
 	        	<div class="row">
 	        		<div class="col-md-12">
-	        			<h1 class="page-header">aqui va el titulo</h1>
+	        			<h1 class="page-header">Categorias de producto</h1>
 	        		</div>	        		
 	        	</div>
 	        	<div class="row">
-	        		<div class="col-md-2">
-	        			<button class="btn" ng-click="anadir()">Añadir categoria</button>
+	        		<div class="col-md-2" style="margin-bottom:15px">
+	        			<button class="btn btn-primary" ng-click="anadir()" >Añadir categoria</button>
 	        		</div>
 	        	</div>
 	        	
@@ -296,14 +296,15 @@
 	        					<th width="200px">Fecha de inserción</th>
 	        					<th>Nombre categoria</th>
 	        					<th width="100px">Editar</th>
+	        					<th width="100px">Eliminar</th>
         					</tr>
 	        			</thead>
 	        			<tbody ng-show="datosTabla.length > 0">
 	        				<tr ng-repeat="datos in datosTabla">
 	        					<td>{{datos.Fecha}}</td>
 	        					<td>{{datos.NombreCategoria}}</td>
-	        					<!--<td>{{datos.descripcion}}</td>-->
-
+	        					<td><button class="form-control btn btn-success" ng-click="editar($index)">Editar</button></td>
+        						<td><button class="form-control btn btn-danger" ng-click="eliminar($index)">Eliminar</button></td>
 	        				</tr>
 	        			</tbody>	        			
 	        		</table>	        		
