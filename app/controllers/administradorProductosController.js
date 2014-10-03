@@ -1,4 +1,4 @@
-admin.controller("administradorProductosController",['$scope','$http', '$upload', '$modal' , function($scope, $http, $upload, $modal){ 
+admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal' , function($scope, $http, $upload, $modal){ 
 	$scope.datosTabla = [];
 	$scope.maximoCategorias = 8;
 	$scope.paginaActual = 1;
@@ -6,7 +6,8 @@ admin.controller("administradorProductosController",['$scope','$http', '$upload'
 
 	$scope.categorias = [];
 
-	$http.get("../../json/categorias.json").success(function(data){
+	$http.get("../../php/consultarProductos.php").success(function(data){
+		console.log(data);
 		$scope.categorias = data;
 	});
 

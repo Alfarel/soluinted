@@ -1,4 +1,4 @@
-admin.controller("administradorController",['$scope','$http','$modal' , function($scope, $http, $modal){
+admin.controller("categoriasController",['$scope','$http','$modal' , function($scope, $http, $modal){
 	
 	$scope.datosTabla = [];
 	$scope.maximoCategorias = 8;

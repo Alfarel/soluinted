@@ -274,41 +274,9 @@
 	            </div>
 	            <!-- /.navbar-static-side -->
 	        </nav>
-	        <div id="page-wrapper">
-	        	<div class="row">
-	        		<div class="col-md-12">
-	        			<h1 class="page-header">Productos</h1>
-	        		</div>	        		
-	        	</div>
-	        	<div class="row" style="margin-bottom:15px">
-	        		<div class="col-md-2">
-	        			<button class="btn btn-primary" ng-click="anadir()">Añadir producto</button>
-	        		</div>
-	        	</div>
-	        	
-	        	<div class="table-responsive" ng-init="cargaInicial()" >	        		
-	        		<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-	        			<thead>
-	        				<tr>
-	        					<th width="200px">Fecha de inserción</th>
-	        					<th>Nombre del producto</th>
-	        					<th width="100px">Editar</th>
-	        					<th width="100px">Eliminar</th>
-        					</tr>
-	        			</thead>
-	        			<tbody ng-show="datosTabla.length > 0">
-	        				<tr ng-repeat="datos in datosTabla">
-	        					<td>{{datos.fechaSubida}}</td>
-	        					<td>{{datos.nombre_producto}}</td>
-	        					<td><button class="form-control btn btn-success" ng-click="modificar($index)">Editar</button></td>
-	        					<td><button class="form-control btn btn-danger" ng-click="eliminar($index)">Eliminar</button></td>
-	        				</tr>
-	        			</tbody>	        			
-	        		</table>	        		
-	        	</div>
-	        	<pagination total-items="totalItems" ng-model="paginaActual" max-size="maximoCategorias" ng-change="pageChanged()" class="pagination-sm" boundary-links="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-	        </div>
-    	</div>
+	        <div id="page-wrapper">	        		        		
+        	</div>
+		</div>
 
 	    
 	</body>
