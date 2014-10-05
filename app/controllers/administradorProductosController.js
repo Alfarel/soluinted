@@ -6,15 +6,10 @@ admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal'
 
 	$scope.categorias = [];
 
-	$http.get("../../php/consultarProductos.php").success(function(data){
-		console.log(data);
-		$scope.categorias = data;
-	});
-
 	$scope.cargaInicial = function(){
 		$scope.datosTabla = [];
-		$http.get("../../json/productos.json")
-		.success(function(data){
+
+		$http.get("../../php/consultarProductos.php").success(function(data){
 			if(data!=null){
 				console.log(data);				
 				$scope.todasCategorias = data;
@@ -120,11 +115,13 @@ admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal'
 			$scope.datosTabla.push(arreglo[i]);
 		}
 	}
-
 }]);
 
 var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, producto){
 
+	console.log("--------------");
+	console.log(producto);
+	console.log("--------------");
 	$scope.seleccion={
 		categoria: ""
 	}
@@ -136,12 +133,16 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 	};
 	$scope.imagen = [];
 
-	$http.get("../../json/categorias.json").success(function(data){
-		$scope.categoria.categorias = data;
+	$scope.datos= {
+		nombre: "",
+		Categoria: "",
+		Caracteristicas: [],
+		imagenes : []
+	};
 
-		if(producto != ""){
+	if(producto != ""){
 			console.log(producto);
-			$scope.datos.nombre = producto.nombre_producto;
+			$scope.datos.nombre = producto.Nombre;
 			$scope.datos.Categoria = producto.Categorias;
 			$scope.datos.Caracteristicas = producto.Caracteristicas;
 
@@ -150,17 +151,13 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 			var x = recuperaCategoria(producto.Categorias);
 			if(x!= null)
 				$scope.seleccion.categoria = x;
-		}
+	}
+	console.log(".-.-.-.-.-.-.-.-.-");
+	console.log($scope.datos);
+
+	$http.get("../../json/categorias.json").success(function(data){
+		$scope.categoria.categorias = data;		
 	});
-
-
-	$scope.datos= {
-		nombre: "",
-		Categoria: "",
-		caracteristicas: [],
-		imagenes : []
-	};
-
 	
 
 	$scope.producto = { descripcion : ""};
