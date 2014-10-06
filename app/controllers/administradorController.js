@@ -8,7 +8,8 @@ admin.controller("categoriasController",['$scope','$http','$modal' , function($s
 
 	$scope.cargaInicial = function(){
 		$scope.datosTabla = [];
-		$http.get("../../json/categorias.json")
+
+		$http.get("../../php/consultarCategorias.php")
 		.success(function(data){
 			if(data!=null){				
 				$scope.todasCategorias = data;
@@ -44,7 +45,6 @@ admin.controller("categoriasController",['$scope','$http','$modal' , function($s
 	    modalInstance.result.then(function (selectedItem) {
 	    	$scope.guardarCategoria(selectedItem);	    	
 	    }, function () {
-	      $log.info('Modal dismissed at: ' + new Date());
 	    });
 	}
 
@@ -62,7 +62,6 @@ admin.controller("categoriasController",['$scope','$http','$modal' , function($s
 	    modalInstance.result.then(function (selectedItem) {
 	    	$scope.guardarCategoria(selectedItem);	    	
 	    }, function () {
-	      $log.info('Modal dismissed at: ' + new Date());
 	    });
 	}
 
@@ -117,8 +116,8 @@ var insercionCategoriasCtrl = function($scope, $modalInstance, data){
 
 	if(data!= ""){
 		$scope.bloquearCampo.bloqueo = true;
-		$scope.datos.nombre = data.NombreCategoria;
-		$scope.datos.descripcion = data.descripcion;
+		$scope.datos.nombre = data.Nombre;
+		$scope.datos.descripcion = data.Descripcion;
 	}
 
 	$scope.Ok = function(){

@@ -92,7 +92,7 @@ admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal'
 			data : {
 				nombre: producto.nombre,
 				categoria: producto.Categoria,
-				caracteristicas: producto.caracteristicas
+				caracteristicas: producto.Caracteristicas
 			},
 			file: producto.imagenes[i]
 			}).success(function(data){
@@ -138,25 +138,18 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 		Categoria: "",
 		Caracteristicas: [],
 		imagenes : []
-	};
+	};	
 
-	if(producto != ""){
-			console.log(producto);
+	$http.get("../../php/consultarCategorias.php").success(function(data){
+		$scope.categoria.categorias = data;	
+
+		if(producto != ""){
+			alert("aqui si entro");
 			$scope.datos.nombre = producto.Nombre;
-			$scope.datos.Categoria = producto.Categorias;
+			$scope.datos.Categoria = producto.Categoria;
 			$scope.datos.Caracteristicas = producto.Caracteristicas;
-
-			console.log(producto.Caracteristicas);
-
-			var x = recuperaCategoria(producto.Categorias);
-			if(x!= null)
-				$scope.seleccion.categoria = x;
-	}
-	console.log(".-.-.-.-.-.-.-.-.-");
-	console.log($scope.datos);
-
-	$http.get("../../json/categorias.json").success(function(data){
-		$scope.categoria.categorias = data;		
+			$scope.seleccion.categoria = producto.Categoria;			
+		}
 	});
 	
 
@@ -164,7 +157,8 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 
 	$scope.add = function (){	
 		if($scope.producto.descripcion != null && $scope.producto.descripcion != "" && $scope.producto.descripcion!= "undefined")
-			$scope.datos.caracteristicas.push($scope.producto.descripcion);
+			$scope.datos.Caracteristicas.push($scope.producto.descripcion);
+		console.log($scope.datos.Caracteristicas);
 	}	
 
 	$scope.addFile = function(){
@@ -179,7 +173,7 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 
 	$scope.Ok = function(){
 		$scope.datos.Categoria = $scope.seleccion.categoria.NombreCategoria;
-		if($scope.datos.nombre!= "" && $scope.datos.Categoria!= "" && $scope.datos.caracteristicas.length>0){
+		if($scope.datos.nombre!= "" && $scope.datos.Categoria!= "" && $scope.datos.Caracteristicas.length>0){
 			$modalInstance.close($scope.datos);
 		}
 	}

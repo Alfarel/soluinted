@@ -16,8 +16,8 @@ if(isset($_FILES["file"])){
 	$con = conectar();
 	//echo $_POST["categoria"];
 
-	$query_categoria = mysqli_query($con, "SELECT idCategoria FROM Categorias WHERE Nombre='".$categoria."'");
-	$cat= $query_categoria->fetch_row()[0];
+	// $query_categoria = mysqli_query($con, "SELECT idCategoria FROM Categorias WHERE Nombre='".$categoria."'");
+	// $cat= $query_categoria->fetch_row()[0];
 
 	$query_productos_existentes = mysqli_query($con,"SELECT * FROM Productos");
 	$count= mysqli_num_rows($query_productos_existentes);
@@ -33,36 +33,49 @@ if(isset($_FILES["file"])){
 	$date = date('Y-m-d');
 	if(!is_numeric($posicion)){
 
-		$url = subir_foto($cat."-".$nombre);
+		$url = subir_foto($categoria."-".$nombre);
 		if($url != false){
 
 			$arrayName = array($url);
 			
-			mysqli_query($con,"INSERT INTO Productos (Fecha, Nombre, Categoria) VALUES ('".$date."','".$nombre."','".$cat."')");
+			mysqli_query($con,"INSERT INTO Productos (Fecha, Nombre, Categoria) VALUES ('".$date."','".$nombre."','".$categoria."')");
 			
 			$idInsercion = mysqli_insert_id($con);
 
 			mysqli_query($con, "INSERT INTO Imagenes_productos (Url, Productos_idProductos) VALUES ('".$url."','".$idInsercion."')");
 
 
-			printf($caracteristicas);
+			
 			$descripciones = json_decode($caracteristicas, true);
+			ECHO json_encode($descripciones);
 			for ($i=0; $i < count($descripciones); $i++) {
-				echo $descripciones[$i];
 				mysqli_query($con, "INSERT INTO Caracteristicas_productos (Descripcion, Producto) VALUES ('".$descripciones[$i]."','".$idInsercion."')");
 			}
 			// $productos_existentes[] = array('fechaSubida' => date("d-m-Y"),'nombre_producto' => $nombre, 'Categorias' => $categoria, 'Caracteristicas' => json_decode($caracteristicas), 'Imagenes' => $arrayName);
 			// file_put_contents("json/productos.json", json_encode($productos_existentes));	
 		}
 		else{
-			mysqli_query($con,"INSERT INTO Productos (Fecha, Nombre, Categoria) VALUES ('".$date."','".$nombre."','".$cat."')");	
+			mysqli_query($con,"INSERT INTO Productos (Fecha, Nombre, Categoria) VALUES ('".$date."','".$nombre."','".$categoria."')");	
 		}		
 	}
 	else {
-		$url = subir_foto($cat."-".$nombre);
+		$url = subir_foto($categoria."-".$nombre);
 		//$arreglo_imagenes = array($productos_existentes[$posicion]["Imagenes"]);
 		if($url != false){
+			mysqli_query($con,"UPDATE Productos SET Categoria = '".$categoria."' WHERE nombre='".$nombre."'");	
 
+			$query_producto = mysqli_query($con, "SELECT idProductos FROM Productos WHERE Nombre='".$nombre."' AND Categoria ='".$categoria."'");
+			$idActualizado= $query_producto->fetch_row()[0];
+
+			print_r($idActualizado);
+
+
+			$descripciones = json_decode($caracteristicas, true);
+			for ($i=0; $i < count($descripciones); $i++) {
+				if(revisa_coincidencias_caracteristicas($descripciones[$i],$posicion, $rows)){
+					mysqli_query($con, "INSERT INTO Caracteristicas_productos (Descripcion, Producto) VALUES ('".$descripciones[$i]."','".$idActualizado."')");
+				}				
+			}
 			// $arreglo_imagenes[] = array($url);	
 			// $productos_existentes[$posicion]["Imagenes"] = $arreglo_imagenes;
 			// file_put_contents("json/productos.json", json_encode($productos_existentes));		
@@ -78,7 +91,15 @@ else{
 	echo "NOooo";
 }
 
-
+function revisa_coincidencias_caracteristicas($mensaje,$posicion, $rows){
+	for($i = 0; $i< count($rows); $i++){
+		if($rows[$posicion] == $mensaje){
+			print("aqui si ta"+ $mensaje);
+			return false;
+		}
+	}
+	return true;
+}
 
 function subir_foto($parteUrl){
 	//SEGURO

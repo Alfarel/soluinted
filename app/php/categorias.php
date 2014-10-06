@@ -32,9 +32,7 @@
 	}
 	else{
 		echo "";
-	}
-	
-		
+	}	
 		
 	mysqli_close($con);
 	//file_put_contents('../json/categorias.json', json_encode($datos));
