@@ -59,6 +59,7 @@ if(isset($_FILES["file"])){
 		}		
 	}
 	else {
+		echo "aqui hay algo";
 		$url = subir_foto($categoria."-".$nombre);
 		//$arreglo_imagenes = array($productos_existentes[$posicion]["Imagenes"]);
 		if($url != false){
@@ -67,15 +68,25 @@ if(isset($_FILES["file"])){
 			$query_producto = mysqli_query($con, "SELECT idProductos FROM Productos WHERE Nombre='".$nombre."' AND Categoria ='".$categoria."'");
 			$idActualizado= $query_producto->fetch_row()[0];
 
-			print_r($idActualizado);
+			$query_caracteristicas = mysqli_query($con, "SELECT * FROM Caracteristicas_productos");
+			$count= mysqli_num_rows($query_caracteristicas);
 
-
-			$descripciones = json_decode($caracteristicas, true);
-			for ($i=0; $i < count($descripciones); $i++) {
-				if(revisa_coincidencias_caracteristicas($descripciones[$i],$posicion, $rows)){
-					mysqli_query($con, "INSERT INTO Caracteristicas_productos (Descripcion, Producto) VALUES ('".$descripciones[$i]."','".$idActualizado."')");
-				}				
-			}
+			if($count >=1){		
+				while($fila = mysqli_fetch_assoc($query_caracteristicas)) {
+		    		$caracteristicas_diligenciadas[] = $fila;
+		    	}
+		    	$descripciones = json_decode($caracteristicas, true);
+			
+				for ($i=0; $i < count($descripciones); $i++) {
+					if(revisa_coincidencias_caracteristicas($descripciones[$i]["Descripcion"],$posicion, $caracteristicas_diligenciadas)){
+						echo "aja y tu que =?"; 
+						//mysqli_query($con, "INSERT INTO Caracteristicas_productos (Descripcion, Producto) VALUES ('".$descripciones[$i]."','".$idActualizado."')");
+					}				
+				}
+	    	}else{
+	    		//TODO: AÑADO LA CARACTERISTICA
+	    	}
+			
 			// $arreglo_imagenes[] = array($url);	
 			// $productos_existentes[$posicion]["Imagenes"] = $arreglo_imagenes;
 			// file_put_contents("json/productos.json", json_encode($productos_existentes));		
@@ -91,13 +102,11 @@ else{
 	echo "NOooo";
 }
 
-function revisa_coincidencias_caracteristicas($mensaje,$posicion, $rows){
-	for($i = 0; $i< count($rows); $i++){
-		if($rows[$posicion] == $mensaje){
+function revisa_coincidencias_caracteristicas($mensaje,$posicion, $rows){	
+		if($rows[$posicion] != $mensaje){
 			print("aqui si ta"+ $mensaje);
 			return false;
-		}
-	}
+		}	
 	return true;
 }
 
