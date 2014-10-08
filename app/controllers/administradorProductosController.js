@@ -111,7 +111,7 @@ admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal'
 
 		$scope.totalItems = arreglo.length;
 		$scope.datosTabla = [];
-		for (var i = 8 * ($scope.paginaActual - 1) ; i < 8 * $scope.paginaActual && i < arreglo.length; i++){
+		for (var i = 8 * ($scope.paginaActual - 1) ; i < 20 * $scope.paginaActual && i < arreglo.length; i++){
 			$scope.datosTabla.push(arreglo[i]);
 		}
 	}

@@ -11,7 +11,8 @@ app.controller('homeController',['$scope','$routeParams','$http' ,
 		$http.get("../app/json/productos.json").success(function(data){
 			$scope.productos = data;
 			console.log(data);
-		});	
+		});
+			
 		
 		// $scope.loadCategories = function(){
 		// 	$http.get('json/categorias.json').
