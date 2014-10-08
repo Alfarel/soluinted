@@ -142,16 +142,17 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 
 	$http.get("../../php/consultarCategorias.php").success(function(data){
 		$scope.categoria.categorias = data;	
-
 		if(producto != ""){
 			alert("aqui si entro");
 			$scope.datos.nombre = producto.Nombre;
 			$scope.datos.Categoria = producto.Categoria;
 			$scope.datos.Caracteristicas = producto.Caracteristicas;
-			$scope.seleccion.categoria = producto.Categoria;			
+			$scope.seleccion.categoria = producto.Categoria.toString();			
+			alert($scope.seleccion.categoria);
 		}
 	});
 	
+
 
 	$scope.producto = { descripcion : ""};
 
@@ -172,7 +173,8 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 	}	
 
 	$scope.Ok = function(){
-		$scope.datos.Categoria = $scope.seleccion.categoria.NombreCategoria;
+		alert($scope.seleccion.categoria);
+		$scope.datos.Categoria = $scope.seleccion.categoria;
 		if($scope.datos.nombre!= "" && $scope.datos.Categoria!= "" && $scope.datos.Caracteristicas.length>0){
 			$modalInstance.close($scope.datos);
 		}
