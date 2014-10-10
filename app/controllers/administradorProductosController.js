@@ -63,6 +63,7 @@ admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal'
 	}
 
 	$scope.eliminar = function($index){
+		console.log($scope.datosTabla[$index]);
 		var modalInstance = $modal.open({
 	      templateUrl: '../../views/modal/notificacionEliminar.html',
 	      controller: verificarBorradoCtrl,
