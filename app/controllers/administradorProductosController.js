@@ -63,7 +63,6 @@ admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal'
 	}
 
 	$scope.eliminar = function($index){
-		console.log($scope.datosTabla[$index]);
 		var modalInstance = $modal.open({
 	      templateUrl: '../../views/modal/notificacionEliminar.html',
 	      controller: verificarBorradoCtrl,
@@ -120,9 +119,6 @@ admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal'
 
 var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, producto){
 
-	console.log("--------------");
-	console.log(producto);
-	console.log("--------------");
 	$scope.seleccion={
 		categoria: ""
 	}
@@ -160,7 +156,7 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 	$scope.add = function (){	
 		if($scope.producto.descripcion != null && $scope.producto.descripcion != "" && $scope.producto.descripcion!= "undefined")
 			$scope.datos.Caracteristicas.push($scope.producto.descripcion);
-		console.log($scope.datos.Caracteristicas);
+		
 	}	
 
 	$scope.addFile = function(){
