@@ -139,24 +139,55 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 
 	$http.get("../../php/consultarCategorias.php").success(function(data){
 		$scope.categoria.categorias = data;	
-		if(producto != ""){
-			alert("aqui si entro");
+		if(producto != ""){			
 			$scope.datos.nombre = producto.Nombre;
-			$scope.datos.Categoria = producto.Categoria;
-			$scope.datos.Caracteristicas = producto.Caracteristicas;
-			$scope.seleccion.categoria = producto.Categoria.toString();			
-			alert($scope.seleccion.categoria);
+			$scope.datos.Categoria = recuperaCategorias(producto.Categoria);
+			$scope.datos.Caracteristicas = [];
+			$scope.datos.CaracteristicasHistorico = producto.Caracteristicas;
+			$scope.seleccion.categoria = recuperaCategorias(producto.Categoria);
+			$scope.datos.ImagenesHistorico = producto.Imagenes;
 		}
 	});
-	
 
+	function recuperaCategorias(codigo){
+		console.log($scope.categoria.categorias);
+		
+		for(var i = 0; i < $scope.categoria.categorias.length; i++){
+			if($scope.categoria.categorias[i].idCategoria == codigo){
+				return $scope.categoria.categorias[i];
+			}
+				
+		}
+		return [];
+	}
+
+	$scope.borrarCaracteristica = function($index){
+		$scope.datos.Caracteristicas.splice($index, 1);
+	}
+
+	$scope.borrarCaracteristicaHistorial = function($index){
+		$http.post("../../php/borrarCaracteristicasProductos.php", $scope.datos.CaracteristicasHistorico[$index])
+		.success(function(data){
+			$scope.datos.CaracteristicasHistorico.splice($index, 1);
+		});
+	}
+
+	$scope.eliminarImagen = function($index){
+		$scope.datos.imagenes.splice($index,1);
+	}
+
+	$scope.eliminarImagenHistorico = function($index){
+		$http.post("../../php/borrarImagenesProductos.php", $scope.datos.ImagenesHistorico[$index])
+		.success(function(data){
+			$scope.datos.ImagenesHistorico.splice($index, 1);
+		});
+	}
 
 	$scope.producto = { descripcion : ""};
 
 	$scope.add = function (){	
 		if($scope.producto.descripcion != null && $scope.producto.descripcion != "" && $scope.producto.descripcion!= "undefined")
-			$scope.datos.Caracteristicas.push($scope.producto.descripcion);
-		
+			$scope.datos.Caracteristicas.push($scope.producto.descripcion);		
 	}	
 
 	$scope.addFile = function(){
@@ -170,8 +201,8 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 	}	
 
 	$scope.Ok = function(){
-		alert($scope.seleccion.categoria);
-		$scope.datos.Categoria = $scope.seleccion.categoria;
+		alert($scope.seleccion.categoria.idCategoria);
+		$scope.datos.Categoria = $scope.seleccion.categoria.idCategoria;
 		if($scope.datos.nombre!= "" && $scope.datos.Categoria!= "" && $scope.datos.Caracteristicas.length>0){
 			$modalInstance.close($scope.datos);
 		}
@@ -194,7 +225,6 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 		for(var i=0; i< $scope.categoria.categorias.length; i++){
 			console.log($scope.categoria.categorias[i].NombreCategoria);
 			if($scope.categoria.categorias[i].NombreCategoria == dato){
-				alert("aqui");
 				return $scope.categoria.categorias[i];
 			}
 		}

@@ -16,4 +16,8 @@ admin.controller("AdministracionMain",['$scope','$http','$modal' , function($sco
 		console.log($scope.paginaActual.url);
 	}
 
+	$scope.cerrarSesion = function(){
+		$http.post("../../php/cerrarSesion.php");
+	}
+
 }]);
