@@ -35,7 +35,8 @@ admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal'
 	    });
 
 	    modalInstance.result.then(function (selectedItem) {
-	    	$scope.guardarProducto(selectedItem)	    	
+	    	console.log("asdaa");
+	    	$scope.guardarProducto(selectedItem);	    	
 	    	 	
 	    }, function () {
 	    });
@@ -85,22 +86,36 @@ admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal'
 
 	$scope.guardarProducto = function(producto){
 		
-
-		for(var i =0 ; i< producto.imagenes.length; i++){
+		if( producto.imagenes.length > 0){
+			for(var i =0 ; i< producto.imagenes.length; i++){
+				$scope.upload = $upload.upload({
+				url: "../../productos.php",
+				data : {
+					nombre: producto.nombre,
+					categoria: producto.Categoria,
+					caracteristicas: producto.Caracteristicas
+				},
+				file: producto.imagenes[i]
+				}).success(function(data){
+					console.log(data);
+					$scope.cargaInicial();
+				}).error(function(){alert("Se prudujo un error inesperado, vuelva a intentarlo");});	
+			}
+		}else{
 			$scope.upload = $upload.upload({
-			url: "../../productos.php",
-			data : {
-				nombre: producto.nombre,
-				categoria: producto.Categoria,
-				caracteristicas: producto.Caracteristicas
-			},
-			file: producto.imagenes[i]
-			}).success(function(data){
-				console.log(data);
-				$scope.cargaInicial();
-			}).error(function(){alert("se daño esto");});	
-
+				url: "../../productos.php",
+				data : {
+					nombre: producto.nombre,
+					categoria: producto.Categoria,
+					caracteristicas: producto.Caracteristicas
+				},
+				file: null
+				}).success(function(data){
+					console.log(data);
+					$scope.cargaInicial();
+				}).error(function(){alert("Se prudujo un error inesperado, vuelva a intentarlo");});	
 		}
+
 	}
 
 	$scope.pageChanged = function(){
@@ -118,7 +133,8 @@ admin.controller("administradorProductos",['$scope','$http', '$upload', '$modal'
 }]);
 
 var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, producto){
-
+	var checkCambios = false;
+	var checkActualizacion = false;
 	$scope.seleccion={
 		categoria: ""
 	}
@@ -149,45 +165,52 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 		}
 	});
 
-	function recuperaCategorias(codigo){
-		console.log($scope.categoria.categorias);
+	$scope.cambiaCategoria = function(){
+		checkCambios = true;
+	}
+
+	function recuperaCategorias(codigo){	
 		
 		for(var i = 0; i < $scope.categoria.categorias.length; i++){
 			if($scope.categoria.categorias[i].idCategoria == codigo){
 				return $scope.categoria.categorias[i];
-			}
-				
+			}				
 		}
 		return [];
 	}
 
 	$scope.borrarCaracteristica = function($index){
-		$scope.datos.Caracteristicas.splice($index, 1);
+		$scope.datos.Caracteristicas.splice($index, 1);		
 	}
 
 	$scope.borrarCaracteristicaHistorial = function($index){
 		$http.post("../../php/borrarCaracteristicasProductos.php", $scope.datos.CaracteristicasHistorico[$index])
 		.success(function(data){
 			$scope.datos.CaracteristicasHistorico.splice($index, 1);
+			checkCambios = true;
 		});
 	}
 
 	$scope.eliminarImagen = function($index){
 		$scope.datos.imagenes.splice($index,1);
+		checkCambios = true;
 	}
 
 	$scope.eliminarImagenHistorico = function($index){
 		$http.post("../../php/borrarImagenesProductos.php", $scope.datos.ImagenesHistorico[$index])
 		.success(function(data){
 			$scope.datos.ImagenesHistorico.splice($index, 1);
+			checkCambios = true;
 		});
 	}
 
 	$scope.producto = { descripcion : ""};
 
 	$scope.add = function (){	
-		if($scope.producto.descripcion != null && $scope.producto.descripcion != "" && $scope.producto.descripcion!= "undefined")
+		if($scope.producto.descripcion != null && $scope.producto.descripcion != "" && $scope.producto.descripcion!= "undefined"){
+			checkActualizacion = true;
 			$scope.datos.Caracteristicas.push($scope.producto.descripcion);		
+		}			
 	}	
 
 	$scope.addFile = function(){
@@ -201,11 +224,18 @@ var insercionProductosCtrl = function($scope, $modalInstance, $http, categoria, 
 	}	
 
 	$scope.Ok = function(){
-		alert($scope.seleccion.categoria.idCategoria);
 		$scope.datos.Categoria = $scope.seleccion.categoria.idCategoria;
-		if($scope.datos.nombre!= "" && $scope.datos.Categoria!= "" && $scope.datos.Caracteristicas.length>0){
-			$modalInstance.close($scope.datos);
+		console.log("asdasda " + checkCambios);
+		if(checkCambios || checkActualizacion){
+			console.log("No");
+			$modalInstance.close($scope.datos);					
 		}
+		else{
+			if($scope.datos.nombre!= "" && $scope.datos.Categoria!= "" && $scope.datos.Caracteristicas.length>0){
+				$modalInstance.close($scope.datos);
+			}else
+				alert("Debe realizar alguna acción para completar la edición");						
+		}		
 	}
 
 	$scope.cancel = function(){

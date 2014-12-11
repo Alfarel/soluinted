@@ -77,9 +77,13 @@ admin.controller("categoriasController",['$scope','$http','$modal' , function($s
 	    });
 
 	    modalInstance.result.then(function () {
-	    	$http.post("../../php/borrarCategorias.php", $scope.datosTabla[$index] )
-	    	.success(function(){
-	    		$scope.cargaInicial();
+	    	$http.post("../../php/borrarCategorias.php", {categoria: $scope.datosTabla[$index].idCategoria })
+	    	.success(function(data){
+    			if(data == "No"){
+    				alert("No fue posible borrar la categoria porque hay productos relacionados a la misma");
+    			}else{
+    				$scope.cargaInicial();	
+    			}	    		
 	    	});    	
 	    }, function () {   	
 	    	console.log(cancelar);

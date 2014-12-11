@@ -11,7 +11,7 @@
 	        </div>
 	        <div class="form-group">
 	            <label>Categoría</label>
-                <select ng-model="seleccion.categoria" class="form-control" ng-options="elemento.Nombre for elemento in categoria.categorias">
+                <select ng-model="seleccion.categoria" ng-change="cambiaCategoria()" class="form-control" ng-options="elemento.Nombre for elemento in categoria.categorias">
                 </select>
                 <!-- <select ng-model="seleccion.categoria" class="form-control">
                     <option ng-repeat= "elemento in categoria.categorias" value="{{elemento.idCategoria}}">
