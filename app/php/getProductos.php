@@ -4,7 +4,7 @@
 		include "conectarDb.php";
 		$con = conectar();
 
-		$consulta = mysqli_query($con, "SELECT * FROM Productos");
+		$consulta = mysqli_query($con, "SELECT * FROM Productos") or die(mysql_error());
 		$count= mysqli_num_rows($consulta);
 
 		$spam = "idProductos";
